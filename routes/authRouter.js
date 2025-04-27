@@ -8,7 +8,7 @@ router.post('/register', RegisterUser)
 
 router.post('/login', LoginUser)
 
-router.get('/logout', LogoutUser)
+router.get('/logout', authMiddleware, LogoutUser)
 
 router.get('/getUser', authMiddleware, GetUser)
 
