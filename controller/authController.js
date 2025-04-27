@@ -49,7 +49,7 @@ export const LoginUser = asyncHandler(async (req, res) => {
     const user = await User.findOne({ email: req.body.email })
 
     if(!req.body.password || !req.body.email) {
-        return res.status(400).json({ message: 'Email atau Password harus diisi' })
+        return res.status(400).json({ message: 'Email or Password must be filled' })
     }
     if(!user) {
         return res.status(400).json({ message: 'Email not found' })
@@ -63,3 +63,17 @@ export const LoginUser = asyncHandler(async (req, res) => {
 
     createSendResToken(user,200,res)
 })
+
+export const GetUser = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id)
+    res.status(200).json({ message: 'Get Detail User successful', data: user })
+})
+
+export const LogoutUser = asyncHandler(async (req, res) => {
+    res.clearCookie('jwt', "", { 
+        httpOnly: true,
+        expires: new Date(Date.now())
+    })
+    res.status(200).json({ message: 'Logout successful' })
+})
+
