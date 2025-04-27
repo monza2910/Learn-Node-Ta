@@ -1,6 +1,7 @@
 import User from '../models/userModel.js'
 import jwt from 'jsonwebtoken'
 import asyncHandler from '../middleware/asyncHandler.js'
+import bcrypt from 'bcrypt'
 
 const signToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -42,4 +43,23 @@ export const RegisterUser = asyncHandler(async (req, res) => {
 
     createSendResToken(createUser,201,res)
     
+})
+
+export const LoginUser = asyncHandler(async (req, res) => {
+    const user = await User.findOne({ email: req.body.email })
+
+    if(!req.body.password || !req.body.email) {
+        return res.status(400).json({ message: 'Email atau Password harus diisi' })
+    }
+    if(!user) {
+        return res.status(400).json({ message: 'Email not found' })
+    }
+
+    const isPasswordMatch = await bcrypt.compare(req.body.password, user.password)
+
+    if(!isPasswordMatch) {
+        return res.status(400).json({ message: 'Password not match' })
+    }
+
+    createSendResToken(user,200,res)
 })
