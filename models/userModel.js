@@ -10,11 +10,6 @@ const userSchema = new Schema({
     required: [true, 'Name is required'],
     unique: [true, 'Nama sudah di Gunakan oleh orang lain'],
   },
-  username: {
-    type: String,
-    required: [true, 'Username is required'],
-    unique: [true, 'Username sudah di Gunakan oleh orang lain'],
-  },
   email: {
     type: String,
     required: [true, 'Email is required'],
@@ -32,6 +27,11 @@ const userSchema = new Schema({
       validator: validator.isLength,
       message: '{VALUE} must be at least 8 characters long',
     },
+  },
+  phone : {
+    type : Number,
+    required : [true, 'Phone is required'],
+    unique : [true, 'Phone sudah di Gunakan oleh orang lain'],
   },
   role: {
     type: String,
