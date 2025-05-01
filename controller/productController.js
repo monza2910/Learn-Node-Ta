@@ -1,0 +1,29 @@
+import express from 'express'
+import asyncHandler from '../middleware/asyncHandler.js'
+
+
+export const getAllProduct = asyncHandler(async (req, res) => {
+    res.status(200).json({ message: 'Get All Product Successful' })
+})
+
+export const createProduct = asyncHandler(async (req, res) => {
+    res.status(200).json({ message: 'Create Product Successful' })
+})
+
+export const getProduct = asyncHandler(async (req, res) => {
+    res.status(200).json({ message: 'Get Product Successful' })
+})
+
+export const updateProduct = asyncHandler(async (req, res) => {
+    res.status(200).json({ message: 'Update Product Successful' })
+})
+
+export const deleteProduct = asyncHandler(async (req, res) => {
+    res.status(200).json({ message: 'Delete Product Successful' })
+})
+
+export const fileUpload = asyncHandler(async (req, res) => {
+    res.status(200).json({ message: 'File Upload Successful' })
+})
+
+

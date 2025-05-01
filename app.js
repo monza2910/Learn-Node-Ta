@@ -15,12 +15,14 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 import authRoutes from './routes/authRouter.js'
+import productRoutes from './routes/productRouter.js'
 
 // Parent Routes
 app.get('/', (req, res) => {
   res.send('This Index M*therF*cker')
 })
 app.use('/api/auth', authRoutes)
+app.use('/api/product', productRoutes)
 
 
 app.use(notFound)
