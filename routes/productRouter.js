@@ -1,24 +1,24 @@
 import express from 'express'
-import { authMiddleware } from '../middleware/authMiddleware.js'
+import { authMiddleware, adminMiddleware } from '../middleware/authMiddleware.js'
 import { getAllProduct,fileUpload,createProduct,getProduct,updateProduct,deleteProduct } from '../controller/productController.js'
 const router = express.Router()
 
 //Get All Product
-router.get('/getAll', authMiddleware, getAllProduct)
+router.get('/getAll',authMiddleware, adminMiddleware, getAllProduct)
 
 //Creaqte Product
-router.post('/create', authMiddleware, createProduct)
+router.post('/create', authMiddleware, adminMiddleware, createProduct)
 
 //Get Product
-router.get('/detail/:id', authMiddleware, getProduct)
+router.get('/detail/:id', authMiddleware, adminMiddleware, getProduct)
 
 //Update Product
-router.put('/update/:id', authMiddleware, updateProduct)
+router.put('/update/:id', authMiddleware, adminMiddleware, updateProduct)
 
 //Delete Product
-router.delete('/delete/:id', authMiddleware, deleteProduct)
+router.delete('/delete/:id',authMiddleware, adminMiddleware, deleteProduct)
 
 //File Upload
-router.post('/fileUpload', authMiddleware, fileUpload)
+router.post('/fileUpload',authMiddleware, adminMiddleware, fileUpload)
 
 export default router
