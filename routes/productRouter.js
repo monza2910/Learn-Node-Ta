@@ -10,7 +10,7 @@ router.get('/getAll', authMiddleware, getAllProduct)
 router.post('/create', authMiddleware, createProduct)
 
 //Get Product
-router.get('/get', authMiddleware, getProduct)
+router.get('/detail/:id', authMiddleware, getProduct)
 
 //Update Product
 router.put('/update', authMiddleware, updateProduct)

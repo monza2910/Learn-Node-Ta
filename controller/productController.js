@@ -3,7 +3,8 @@ import asyncHandler from '../middleware/asyncHandler.js'
 import Product from '../models/productModel.js'
 
 export const getAllProduct = asyncHandler(async (req, res) => {
-    res.status(200).json({ message: 'Get All Product Successful' })
+    const products = await Product.find()
+    res.status(200).json({ message: 'Get All Product Successful', data: products })
 })
 
 export const createProduct = asyncHandler(async (req, res) => {
@@ -23,7 +24,9 @@ export const createProduct = asyncHandler(async (req, res) => {
 })
 
 export const getProduct = asyncHandler(async (req, res) => {
-    res.status(200).json({ message: 'Get Product Successful' })
+    const paramsId = req.params.id
+    const product = await Product.findById(paramsId)
+    res.status(200).json({ message: 'Get Product Successful', data: product })
 })
 
 export const updateProduct = asyncHandler(async (req, res) => {
