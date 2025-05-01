@@ -1,13 +1,25 @@
 import express from 'express'
 import asyncHandler from '../middleware/asyncHandler.js'
-
+import Product from '../models/productModel.js'
 
 export const getAllProduct = asyncHandler(async (req, res) => {
     res.status(200).json({ message: 'Get All Product Successful' })
 })
 
 export const createProduct = asyncHandler(async (req, res) => {
-    res.status(200).json({ message: 'Create Product Successful' })
+    
+    const product = await Product.create({
+        name: req.body.name,
+        price: req.body.price,
+        description: req.body.description,
+        image: req.body.image,
+        quantity: req.body.quantity,
+        brand: req.body.brand
+    })
+    res.status(200).json({ 
+        message: 'Create Product Successful',
+        data: product
+    })
 })
 
 export const getProduct = asyncHandler(async (req, res) => {
