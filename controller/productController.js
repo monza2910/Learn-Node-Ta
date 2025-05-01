@@ -17,7 +17,7 @@ export const createProduct = asyncHandler(async (req, res) => {
         quantity: req.body.quantity,
         brand: req.body.brand
     })
-    res.status(200).json({ 
+    return res.status(200).json({
         message: 'Create Product Successful',
         data: product
     })
@@ -26,15 +26,34 @@ export const createProduct = asyncHandler(async (req, res) => {
 export const getProduct = asyncHandler(async (req, res) => {
     const paramsId = req.params.id
     const product = await Product.findById(paramsId)
-    res.status(200).json({ message: 'Get Product Successful', data: product })
+
+    if(!product) {
+        return res.status(404).json({ message: 'Product not found' })
+    }
+    return res.status(200).json({ message: 'Get Product Successful', data: product })
 })
 
 export const updateProduct = asyncHandler(async (req, res) => {
-    res.status(200).json({ message: 'Update Product Successful' })
+    const paramsId = req.params.id
+    const updateProduct = await Product.findByIdAndUpdate(paramsId, req.body, {
+        new: true,
+        runValidators: false,
+    })
+
+    if(!updateProduct) {
+        return res.status(404).json({ message: 'Product not found' })
+    }
+    return res.status(200).json({ message: 'Update Product Successful', data: updateProduct })
 })
 
 export const deleteProduct = asyncHandler(async (req, res) => {
-    res.status(200).json({ message: 'Delete Product Successful' })
+    const paramsId = req.params.id
+    const deleteProduct = await Product.findByIdAndDelete(paramsId)
+
+    if(!deleteProduct) {
+        return res.status(404).json({ message: 'Product not found' })
+    }
+    return res.status(200).json({ message: 'Delete Product Successful' })
 })
 
 export const fileUpload = asyncHandler(async (req, res) => {

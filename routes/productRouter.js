@@ -13,10 +13,10 @@ router.post('/create', authMiddleware, createProduct)
 router.get('/detail/:id', authMiddleware, getProduct)
 
 //Update Product
-router.put('/update', authMiddleware, updateProduct)
+router.put('/update/:id', authMiddleware, updateProduct)
 
 //Delete Product
-router.delete('/delete', authMiddleware, deleteProduct)
+router.delete('/delete/:id', authMiddleware, deleteProduct)
 
 //File Upload
 router.post('/fileUpload', authMiddleware, fileUpload)
